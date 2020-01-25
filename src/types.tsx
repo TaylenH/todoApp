@@ -5,3 +5,5 @@ export interface todoItem {
     id: string;
 };
 
+export type items = todoItem[];
+

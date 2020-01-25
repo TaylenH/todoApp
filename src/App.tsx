@@ -1,18 +1,13 @@
 import React from 'react';
-import  uuid from 'uuid/v4';
-import { todoItem } from './types';
-import TodoItem from './components/TodoItem/TodoItem';
-
-
-type items = todoItem[];
-type updater = 'name' | 'description' | 'importance';
+import { todoItem, items } from './types';
+import { Button } from '@material-ui/core';
+import TodoItem from './components/TodoItem';
+import TodoDialog from './components/TodoDialog';
 
 const App: React.FC = () => {
     const [items, updateItems] = React.useState<items>([]);
-    const [itemName, updateName] = React.useState<string>("");
-    const [itemDescription, updateDescription] = React.useState<string>("");
-    const [itemImportance, updateImportance] = React.useState<number>(0);
     const [sortOption, setSortOption] = React.useState<string>('time');
+    const [isOpen, setOpen] = React.useState<boolean>(false);
 
     let sortedItems = [...items];
     sortOption === 'time' || sortedItems.sort((item1, item2) => {
@@ -25,35 +20,6 @@ const App: React.FC = () => {
       return 0;
     });
 
-    function handleUpdate(event: React.ChangeEvent<HTMLInputElement>, updater: updater): void {
-      switch (updater){
-        case 'name':
-          updateName(event.target.value);
-          break;
-        case 'description':
-          updateDescription(event.target.value);
-          break;
-        case 'importance':
-          updateImportance(parseInt(event.target.value));
-          break;
-      }
-    }
-
-    function handleAdd(event: React.MouseEvent): void {
-      event.preventDefault();
-      if(itemName && itemImportance !== 0){
-        let item: todoItem = {
-          name : itemName,
-          description: itemDescription,
-          importance: itemImportance,
-          id: uuid()
-        }
-        updateItems([...items, item]);
-      }else{
-        alert('Please makes sure to enter name and importance');
-      }
-    }
-
     function handleDelete(id: string): void{
       updateItems(items.filter(item => item.id !== id));
     }
@@ -62,9 +28,26 @@ const App: React.FC = () => {
       setSortOption(event.target.value);
     }
 
+    function handleClickOpen(): void {
+      setOpen(true);
+    }
+
+    function handleClickClose(): void {
+      setOpen(false);
+    }
+
     return (
       <>
         <h1>Todo List</h1>
+        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+          Open form dialog
+        </Button>
+        <TodoDialog 
+          isOpen={isOpen} 
+          handleClose={handleClickClose}
+          updateItems={updateItems}
+          items={items}
+        />
         <form>
           <input type='text' value={itemName} onChange={(e) => handleUpdate(e, 'name')} placeholder='Todo name' />
           <input type='textarea' value={itemDescription} onChange={(e) => handleUpdate(e, 'description')} placeholder='Todo description' />
