@@ -1,8 +1,9 @@
 import React from 'react';
-import { todoItem, items } from './types';
+import { items } from './types';
 import { Button } from '@material-ui/core';
 import TodoItem from './components/TodoItem';
 import TodoDialog from './components/TodoDialog';
+import TopBar from './components/TopBar';
 
 const App: React.FC = () => {
     const [items, updateItems] = React.useState<items>([]);
@@ -38,7 +39,7 @@ const App: React.FC = () => {
 
     return (
       <>
-        <h1>Todo List</h1>
+        <TopBar />
         <Button variant="outlined" color="primary" onClick={handleClickOpen}>
           Open form dialog
         </Button>
@@ -49,12 +50,8 @@ const App: React.FC = () => {
           items={items}
         />
         <form>
-          <input type='text' value={itemName} onChange={(e) => handleUpdate(e, 'name')} placeholder='Todo name' />
-          <input type='textarea' value={itemDescription} onChange={(e) => handleUpdate(e, 'description')} placeholder='Todo description' />
-          Item Importance: <input type='number' value={itemImportance} onChange={(e) => handleUpdate(e, 'importance')} min={1} max={9}/>
           Sort By: <label><input type='radio' value='time' checked={sortOption === 'time'} onChange={e => handleSortSelection(e)} />Time added</label>
           <label><input type='radio' value='importance' checked={sortOption === 'importance'} onChange={e => handleSortSelection(e)} />Importance</label>
-          <button value='Add to list' onClick={(e) => handleAdd(e)} >Add to list</button>
         </form>
         <hr/>
         {sortedItems.map((item) => {

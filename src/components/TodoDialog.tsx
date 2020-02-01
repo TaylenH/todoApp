@@ -57,6 +57,7 @@ const TodoDialog: React.FC<props> = ({ isOpen, handleClose, updateItems, items }
             id: uuid()
           }
           updateItems([...items, item]);
+          handleClose();
         }else{
           alert('Please makes sure to enter name and importance');
         }
@@ -66,17 +67,17 @@ const TodoDialog: React.FC<props> = ({ isOpen, handleClose, updateItems, items }
           switch(updater){
               case 'name':
                   if(event.target.value.length < 3){
-                      updateErrors([true, ...formErrors.slice(1, 1)]);
+                      updateErrors([true, formErrors[1]]);
                   }else if(formErrors[0] === true){
-                    updateErrors([false, ...formErrors.slice(1, 1)]);
+                    updateErrors([false, formErrors[1]]);
                   }
                 break;
                 case 'importance':
                     let importance = parseInt(event.target.value);
-                    if(importance < 0 || importance > 9){
-                        updateErrors([...formErrors.slice(0, 1), true]);
+                    if(importance < 1 || importance > 9){
+                        updateErrors([formErrors[0], true]);
                     }else if(formErrors[1] === true){
-                        updateErrors([...formErrors.slice(0, 1), false]);
+                        updateErrors([formErrors[0], false]);
                     }
                     break;
           }
@@ -118,14 +119,20 @@ const TodoDialog: React.FC<props> = ({ isOpen, handleClose, updateItems, items }
             type='textarea'
           />
           <TextField
-            //TODO: finish adding the item importance field from app.tsx line 54
+            id='todoImportanceField'
+            label='importance'
+            onChange={e => handleUpdate((e as inputE), 'importance')}
+            required
+            type='number'
+            onBlur={e => handleBlur((e as blurE), 'importance')}
+            error={formErrors[1]}
           />
           <DialogActions>
             <Button onClick={handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={handleClose} color="primary">
-              Add to list {/**TODO: add functionality of add button: App.tsx line 57 */}
+            <Button onClick={e => handleAdd(e)} color="primary">
+              Add to list 
             </Button>
           </DialogActions>
         </Dialog>
