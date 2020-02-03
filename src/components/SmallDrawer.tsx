@@ -7,12 +7,12 @@ import {
     ListItemIcon,
     ListItemText
 } from '@material-ui/core';
-import InboxIcon from '@material-ui/icons/Inbox';
-import MailIcon from '@material-ui/icons/Mail';
+import DeleteSweepIcon from '@material-ui/icons/DeleteSweep';
 
 type props = {
     toggleDrawer(open: boolean): (event: React.KeyboardEvent | React.MouseEvent) => void,
-    open: boolean
+    open: boolean,
+    handleDeleteAll(): void
 };
 
 const useStyles = makeStyles({
@@ -24,18 +24,16 @@ const useStyles = makeStyles({
     },
 });
 
-const SmallDrawer = ({toggleDrawer, open}: props) => {
+const SmallDrawer = ({toggleDrawer, open, handleDeleteAll}: props) => {
     const classes = useStyles();
 
     const sideList = () => (
         <div className={classes.list} role='presentation' onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
             <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
+                <ListItem button onClick={() => handleDeleteAll()}>
+                    <ListItemIcon><DeleteSweepIcon /></ListItemIcon>
+                    <ListItemText>Delete All</ListItemText>
+                </ListItem>
             </List>
         </div>
     );
