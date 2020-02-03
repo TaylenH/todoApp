@@ -4,11 +4,13 @@ import { Button } from '@material-ui/core';
 import TodoItem from './components/TodoItem';
 import TodoDialog from './components/TodoDialog';
 import TopBar from './components/TopBar';
+import SmallDrawer from './components/SmallDrawer';
 
 const App: React.FC = () => {
     const [items, updateItems] = React.useState<items>([]);
     const [sortOption, setSortOption] = React.useState<string>('time');
-    const [isOpen, setOpen] = React.useState<boolean>(false);
+    const [isTodoOpen, setTodoOpen] = React.useState<boolean>(false);
+    const [isDrawerOpen, setDrawerOpen] = React.useState<boolean>(false);
 
     let sortedItems = [...items];
     sortOption === 'time' || sortedItems.sort((item1, item2) => {
@@ -21,31 +23,42 @@ const App: React.FC = () => {
       return 0;
     });
 
-    function handleDelete(id: string): void{
+    const handleDelete = (id: string): void => {
       updateItems(items.filter(item => item.id !== id));
     }
 
-    function handleSortSelection(event : React.ChangeEvent<HTMLInputElement>): void {
+    const handleSortSelection = (event : React.ChangeEvent<HTMLInputElement>): void => {
       setSortOption(event.target.value);
     }
 
-    function handleClickOpen(): void {
-      setOpen(true);
+    const handleTodoOpen = (): void => {
+      setTodoOpen(true);
     }
 
-    function handleClickClose(): void {
-      setOpen(false);
+    const handleTodoClose = (): void => {
+      setTodoOpen(false);
     }
+
+    const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (event && event.type === 'keydown' &&
+          ((event as React.KeyboardEvent).key === 'Tab' ||
+          (event as React.KeyboardEvent).key === 'Shift')){
+              return;
+          }
+
+      setDrawerOpen(open);
+  }
 
     return (
       <>
-        <TopBar />
-        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+        <TopBar toggleDrawer={toggleDrawer} />
+        <Button variant="outlined" color="primary" onClick={handleTodoOpen}>
           Open form dialog
         </Button>
+        <SmallDrawer toggleDrawer={toggleDrawer} open={isDrawerOpen} />
         <TodoDialog 
-          isOpen={isOpen} 
-          handleClose={handleClickClose}
+          isOpen={isTodoOpen} 
+          handleClose={handleTodoClose}
           updateItems={updateItems}
           items={items}
         />
