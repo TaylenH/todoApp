@@ -12,7 +12,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import uuid from 'uuid/v4';
 import { todoItem, items } from '../types';
 
-interface props {
+type props = {
     isOpen: boolean;
     handleClose(): void;
     updateItems: React.Dispatch<React.SetStateAction<items>>

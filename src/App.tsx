@@ -27,8 +27,8 @@ const App: React.FC = () => {
       updateItems(items.filter(item => item.id !== id));
     }
 
-    const handleDeleteAll = (): void => {
-      updateItems([]);
+    const handleUpdateItems = (items: items): void => {
+      updateItems(items);
     }
 
     const handleSortSelection = (event : React.ChangeEvent<HTMLInputElement>): void => {
@@ -59,7 +59,7 @@ const App: React.FC = () => {
         <Button variant="outlined" color="primary" onClick={handleTodoOpen}>
           Open form dialog
         </Button>
-        <SmallDrawer toggleDrawer={toggleDrawer} open={isDrawerOpen} handleDeleteAll={handleDeleteAll} />
+        <SmallDrawer toggleDrawer={toggleDrawer} open={isDrawerOpen} updateItems={handleUpdateItems} />
         <TodoDialog 
           isOpen={isTodoOpen} 
           handleClose={handleTodoClose}
