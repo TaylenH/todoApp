@@ -7,6 +7,7 @@ import {
     ListItemIcon,
     ListItemText
 } from '@material-ui/core';
+import EventListener from 'react-event-listener';
 import DeleteSweepIcon from '@material-ui/icons/DeleteSweep';
 import DeleteAllDialog from './DeleteAllDialog';
 import { items } from '../types';
@@ -46,7 +47,7 @@ const SmallDrawer = ({toggleDrawer, open, updateItems}: props) => {
     const sideList = () => (
         <div className={classes.list} role='presentation' onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
             <List>
-                <ListItem button onClick={handleDeleteOpen}>
+                <ListItem button onClick={handleDeleteOpen} autoFocus>
                     <ListItemIcon><DeleteSweepIcon /></ListItemIcon>
                     <ListItemText>Delete All</ListItemText>
                 </ListItem>

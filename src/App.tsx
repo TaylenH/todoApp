@@ -1,12 +1,29 @@
 import React from 'react';
 import { items } from './types';
-import { Button } from '@material-ui/core';
+import { Fab } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import EventListener from 'react-event-listener';
 import TodoItem from './components/TodoItem';
 import TodoDialog from './components/TodoDialog';
 import TopBar from './components/TopBar';
 import SmallDrawer from './components/SmallDrawer';
+import AddIcon from '@material-ui/icons/Add';
+import { AutoComplete } from 'material-ui';
+
+const useStyles = makeStyles({
+  fab: {
+    margin: 0,
+    top: 'auto',
+    right: 20,
+    bottom: 20,
+    left: 'auto',
+    position: 'fixed'
+  }
+});
 
 const App: React.FC = () => {
+    const styles = useStyles();
+
     const [items, updateItems] = React.useState<items>([]);
     const [sortOption, setSortOption] = React.useState<string>('time');
     const [isTodoOpen, setTodoOpen] = React.useState<boolean>(false);
@@ -49,16 +66,20 @@ const App: React.FC = () => {
           (event as React.KeyboardEvent).key === 'Shift')){
               return;
           }
-
+  
       setDrawerOpen(open);
+    }
+
+    const handleKeyDownClose = (event: KeyboardEvent) => {
+      if(isDrawerOpen && (event.key === 'Escape' || event.key === 'Backspace' || event.key === 'Delete')){
+          toggleDrawer(false);
+      }
   }
 
     return (
       <>
         <TopBar toggleDrawer={toggleDrawer} />
-        <Button variant="outlined" color="primary" onClick={handleTodoOpen}>
-          Open form dialog
-        </Button>
+        <EventListener target={document} onKeyDown={handleKeyDownClose} />
         <SmallDrawer toggleDrawer={toggleDrawer} open={isDrawerOpen} updateItems={handleUpdateItems} />
         <TodoDialog 
           isOpen={isTodoOpen} 
@@ -74,6 +95,9 @@ const App: React.FC = () => {
         {sortedItems.map((item) => {
           return <TodoItem todoItem={item} handleDelete={handleDelete} key={item.id} />
         })}
+        <Fab color='primary' onClick={handleTodoOpen} className={styles.fab} >
+          <AddIcon />
+        </Fab>
       </>
     );
 }
