@@ -1,5 +1,5 @@
 import React from 'react';
-import { Paper, IconButton } from '@material-ui/core';
+import { Paper, IconButton, ExpansionPanel} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import RemoveIcon from '@material-ui/icons/Remove';
@@ -28,8 +28,8 @@ const useStyles = makeStyles({
         display: 'flex',
         alignItems: 'center'
     },
-    finalItem: {
-        marginBottom: '50px',
+    fullSurface: {
+        marginBottom: '80px'
     }
 })
 
@@ -60,7 +60,7 @@ const TodoListSurface = ({sortedItems, handleDelete, sortType, handleSortIconCli
     };
 
     return (
-        <Paper>
+        <Paper className={styles.fullSurface}>
             <div className={styles.mainSurface}>
                 <h4 className={styles.nameLabel}>Name</h4>
                 <div className={styles.importanceBox}>
@@ -74,7 +74,6 @@ const TodoListSurface = ({sortedItems, handleDelete, sortType, handleSortIconCli
                     todoItem={item}
                     handleDelete={handleDelete}
                     key={item.id}
-                    isFinal={item === sortedItems[sortedItems.length - 1] ? true : false}
                 />
             })}
         </Paper>

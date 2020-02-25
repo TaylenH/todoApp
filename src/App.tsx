@@ -148,7 +148,6 @@ const App: React.FC = () => {
           updateItems={updateItems}
           items={items}
         />
-        <hr/>
         <TodoListSurface sortedItems={sortedItems} handleDelete={handleDelete} sortType={sortOption} handleSortIconClick={handleSortIconClick} />
         <Fab color='primary' onClick={handleTodoDialogOpen} className={styles.fab} >
           <AddIcon />
