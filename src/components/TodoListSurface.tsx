@@ -29,7 +29,8 @@ const useStyles = makeStyles({
         alignItems: 'center'
     },
     fullSurface: {
-        marginBottom: '80px'
+        marginBottom: '80px',
+        paddingBottom: '10px'
     }
 })
 
