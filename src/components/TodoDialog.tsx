@@ -19,17 +19,19 @@ type props = {
     items: items;
 }
 
-type updater = 'name' | 'description' | 'importance';
+type updater = 'name' | 'importance';
 type inputE = React.ChangeEvent<HTMLInputElement>;
 type blurE = React.FocusEvent<HTMLInputElement>;
 
 const useStyles = makeStyles({});
 
+/***TODO: add validation to name 32 characters is max */
+
+
 const TodoDialog: React.FC<props> = ({ isOpen, handleClose, updateItems, items }) => {
     const classes = useStyles();
 
     const [itemName, updateName] = React.useState<string>("");
-    const [itemDescription, updateDescription] = React.useState<string>("");
     const [itemImportance, updateImportance] = React.useState<number>(0);
     const [formErrors, updateErrors] = React.useState<boolean[]>([false, false]);
 
@@ -37,9 +39,6 @@ const TodoDialog: React.FC<props> = ({ isOpen, handleClose, updateItems, items }
         switch (updater){
             case 'name':
             updateName(event.target.value);
-            break;
-            case 'description':
-            updateDescription(event.target.value);
             break;
             case 'importance':
             updateImportance(parseInt(event.target.value));
@@ -52,7 +51,6 @@ const TodoDialog: React.FC<props> = ({ isOpen, handleClose, updateItems, items }
         if(itemName && itemImportance !== 0 && formErrors[0] !== true && formErrors[1] !== true){
           let item: todoItem = {
             name : itemName,
-            description: itemDescription,
             importance: itemImportance,
             id: uuid()
           }
@@ -94,8 +92,7 @@ const TodoDialog: React.FC<props> = ({ isOpen, handleClose, updateItems, items }
           <DialogTitle id="form-dialog-title">New Todo list item</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Please enter the name and importance of your Todo list item,
-              optionally you may enter a reminder description.
+              Please enter the name and importance of your Todo list item
             </DialogContentText>
           </DialogContent>
           <TextField
@@ -111,14 +108,7 @@ const TodoDialog: React.FC<props> = ({ isOpen, handleClose, updateItems, items }
             onBlur={e => handleBlur((e as blurE), 'name')}
             error={formErrors[0]}
           />
-          <TextField
-            id='todoDescriptionField'
-            label='Description'
-            onChange={e => handleUpdate((e as inputE), 'description')}
-            placeholder='Enter Item Description'
-            type='textarea'
-          />
-          <TextField
+        <TextField
             id='todoImportanceField'
             label='importance'
             onChange={e => handleUpdate((e as inputE), 'importance')}
