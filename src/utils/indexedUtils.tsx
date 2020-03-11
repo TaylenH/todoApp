@@ -21,6 +21,7 @@ export const openConnection = async () => {
                 objectStore.createIndex('id', 'id', { unique: true });
             }
         }
+        
 
         const database = {
 
