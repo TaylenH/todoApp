@@ -10,13 +10,14 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import uuid from 'uuid/v4';
-import { todoItem, items } from '../types';
+import { todoItem, items, myDbs } from '../utils/types';
 
 type props = {
     isOpen: boolean;
     handleClose(): void;
     updateItems: React.Dispatch<React.SetStateAction<items>>
     items: items;
+    db: myDbs | null;
 }
 
 type updater = 'name' | 'importance';
@@ -28,7 +29,7 @@ const useStyles = makeStyles({});
 /***TODO: add validation to name 32 characters is max */
 
 
-const TodoDialog: React.FC<props> = ({ isOpen, handleClose, updateItems, items }) => {
+const TodoDialog: React.FC<props> = ({ isOpen, handleClose, updateItems, items, db }) => {
     const classes = useStyles();
 
     const [itemName, updateName] = React.useState<string>("");
@@ -54,7 +55,18 @@ const TodoDialog: React.FC<props> = ({ isOpen, handleClose, updateItems, items }
             importance: itemImportance,
             id: uuid()
           }
+
+          const addToDatabase = async () => {
+            if(db){
+              try{
+                await db.addRecord(item.id, item.name, item.importance);
+              }catch(e){
+                console.log(e.message);
+              }
+            }
+          }
           updateItems([...items, item]);
+          addToDatabase();
           handleClose();
         }else{
           alert('Please makes sure to enter name and importance');

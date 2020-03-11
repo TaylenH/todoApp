@@ -1,5 +1,3 @@
-import { FileCloudOff } from "material-ui/svg-icons";
-
 export default {
     pallet: {
 

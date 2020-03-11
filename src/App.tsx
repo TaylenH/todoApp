@@ -1,5 +1,5 @@
 import React from "react";
-import { items, sortType } from "./types";
+import { items, sortType, myDbs, dbsTodos } from "./utils/types";
 import { Fab, Container, Snackbar } from "@material-ui/core";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
@@ -10,6 +10,7 @@ import SmallDrawer from "./components/SmallDrawer";
 import AddIcon from "@material-ui/icons/Add";
 
 import TodoListSurface from "./components/TodoListSurface";
+import { openConnection } from './utils/indexedUtils';
 
 //Mock Data
 const Mock: items = [
@@ -74,14 +75,46 @@ const useStyles = makeStyles({
 const App: React.FC = () => {
   const styles = useStyles();
 
-  const [items, updateItems] = React.useState<items>(Mock);
+  const [items, updateItems] = React.useState<items>([]);
   const [sortOption, setSortOption] = React.useState<sortType>(0);
   const [isTodoOpen, setTodoOpen] = React.useState<boolean>(false);
   const [isDrawerOpen, setDrawerOpen] = React.useState<boolean>(false);
   const [isPomodoReady, setPomodoReady] = React.useState<boolean>(false);
   const [pomodoInterval, setPomodoInterval] = React.useState<number>(0);
+  const [db, setDb] = React.useState<myDbs | null>(null);
 
   let sortedItems = [...items];
+
+  React.useEffect(() => {
+    const establishConnection = async () => {
+      console.log("establish connection");
+      let request = await openConnection().then(db => db);
+      setDb(request);
+      return request;
+    }
+    const getTodos = async (database: myDbs) => {
+      console.log(database)
+      if(database){
+        let list = await (database as myDbs).readAllTodos().then((list) => list);
+        let todoList: items = (list as dbsTodos[]).map(item => {
+          return {
+            id: item.id,
+            name: item.todoDescription,
+            importance: item.todoImportance
+          } 
+        });
+        updateItems(todoList);
+      }
+    }
+
+    try{
+      establishConnection().then((database) => getTodos(database));
+    }catch(e){
+      console.log(e.message);
+    }
+
+  }, []);
+
 
   //Sorts the list accordingly based on the sort option selected
   sortOption === 0 ||
@@ -95,7 +128,17 @@ const App: React.FC = () => {
     });
 
   const handleDelete = (id: string): void => {
+    const deleteFromDatabase = async () => {
+      if(db){
+        try{
+          await (db as myDbs).deleteRecord(id);
+        }catch(e){
+          console.log(e.message);
+        }
+      }
+    }
     updateItems(items.filter(item => item.id !== id));
+    deleteFromDatabase();
   };
 
   const handleUpdateItems = (items: items): void => {
@@ -184,12 +227,14 @@ const App: React.FC = () => {
         updateItems={handleUpdateItems}
         handlePomodoStart={handlePomodoStart}
         handlePomodoEnd={handlePomodoEnd}
+        db={db}
       />
       <TodoDialog
         isOpen={isTodoOpen}
         handleClose={handleTodoDialogClose}
         updateItems={updateItems}
         items={items}
+        db={db}
       />
       <TodoListSurface
         sortedItems={sortedItems}

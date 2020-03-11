@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import RemoveIcon from '@material-ui/icons/Remove';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
-import { items, sortType } from '../types';
+import { items, sortType } from '../utils/types';
 import TodoItem from './TodoItem';
 
 type props = {

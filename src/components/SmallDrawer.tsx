@@ -7,19 +7,19 @@ import {
     ListItemIcon,
     ListItemText
 } from '@material-ui/core';
-import EventListener from 'react-event-listener';
 import DeleteSweepIcon from '@material-ui/icons/DeleteSweep';
 import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
 import DeleteAllDialog from './DeleteAllDialog';
-import { items } from '../types';
+import { items, myDbs } from '../utils/types';
 import PomodoDialog from './PomodoDialog';
 
 type props = {
     toggleDrawer(open: boolean): (event: React.KeyboardEvent | React.MouseEvent) => void,
     open: boolean,
-    updateItems(items: items): void
-    handlePomodoStart(): void
-    handlePomodoEnd(): void
+    updateItems(items: items): void,
+    handlePomodoStart(): void,
+    handlePomodoEnd(): void,
+    db: myDbs | null
 };
 
 const useStyles = makeStyles({
@@ -31,7 +31,7 @@ const useStyles = makeStyles({
     },
 });
 
-const SmallDrawer = ({toggleDrawer, open, updateItems, handlePomodoStart, handlePomodoEnd}: props) => {
+const SmallDrawer = ({toggleDrawer, open, updateItems, handlePomodoStart, handlePomodoEnd, db}: props) => {
     const classes = useStyles();
     const [isDeleteOpen, setDeleteOpen] = React.useState<boolean>(false);
     const [isPomodoOpen, setPomodoOpen] = React.useState<boolean>(false);
@@ -45,7 +45,18 @@ const SmallDrawer = ({toggleDrawer, open, updateItems, handlePomodoStart, handle
     }
 
     const handleDeleteAll = (): void => {
+        const deleteAllFromDatabase = async () => {
+            if(db){
+                try{
+                    await (db as myDbs).deleteAllRecords();
+                }catch(e){
+                    console.log(e.message);
+                }
+            }
+        }
+
         updateItems([]);
+        deleteAllFromDatabase();
         handleDeleteClose();
     }
 
