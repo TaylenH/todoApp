@@ -4,62 +4,13 @@ import { Fab, Container, Snackbar } from "@material-ui/core";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
 import EventListener from "react-event-listener";
-import TodoDialog from "./components/TodoDialog";
-import TopBar from "./components/TopBar";
-import SmallDrawer from "./components/SmallDrawer";
+import TodoDialog from "./components/TodoDialog/TodoDialog";
+import TopBar from "./components/TopBar/TopBar";
+import SmallDrawer from "./components/SmallDrawer/SmallDrawer";
 import AddIcon from "@material-ui/icons/Add";
 
-import TodoListSurface from "./components/TodoListSurface";
-import { openConnection } from './utils/indexedUtils';
-
-//Mock Data
-const Mock: items = [
-  {
-    name: "item 1",
-    importance: 1,
-    id: "1"
-  },
-  {
-    name: "item 2",
-    importance: 2,
-    id: "2"
-  },
-  {
-    name: "item 3",
-    importance: 3,
-    id: "3"
-  },
-  {
-    name: "item 4",
-    importance: 4,
-    id: "4"
-  },
-  {
-    name: "item 5",
-    importance: 5,
-    id: "5"
-  },
-  {
-    name: "item 6",
-    importance: 6,
-    id: "6"
-  },
-  {
-    name: "item 7",
-    importance: 7,
-    id: "7"
-  },
-  {
-    name: "item 8",
-    importance: 8,
-    id: "8"
-  },
-  {
-    name: "item 9",
-    importance: 9,
-    id: "9"
-  }
-];
+import TodoListSurface from "./components/TodolistSurface/TodoListSurface";
+import { openConnection } from "./utils/indexedUtils";
 
 const useStyles = makeStyles({
   fab: {
@@ -88,33 +39,31 @@ const App: React.FC = () => {
   React.useEffect(() => {
     const establishConnection = async () => {
       console.log("establish connection");
-      let request = await openConnection().then(db => db);
+      let request = await openConnection();
       setDb(request);
       return request;
-    }
+    };
     const getTodos = async (database: myDbs) => {
-      console.log(database)
-      if(database){
-        let list = await (database as myDbs).readAllTodos().then((list) => list);
-        let todoList: items = (list as dbsTodos[]).map(item => {
+      console.log(database);
+      if (database) {
+        let list = await database.readAllTodos();
+        let todoList: items = list.map(item => {
           return {
             id: item.id,
             name: item.todoDescription,
             importance: item.todoImportance
-          } 
+          };
         });
         updateItems(todoList);
       }
-    }
+    };
 
-    try{
-      establishConnection().then((database) => getTodos(database));
-    }catch(e){
+    try {
+      establishConnection().then(database => getTodos(database));
+    } catch (e) {
       console.log(e.message);
     }
-
   }, []);
-
 
   //Sorts the list accordingly based on the sort option selected
   sortOption === 0 ||
@@ -129,14 +78,14 @@ const App: React.FC = () => {
 
   const handleDelete = (id: string): void => {
     const deleteFromDatabase = async () => {
-      if(db){
-        try{
+      if (db) {
+        try {
           await (db as myDbs).deleteRecord(id);
-        }catch(e){
+        } catch (e) {
           console.log(e.message);
         }
       }
-    }
+    };
     updateItems(items.filter(item => item.id !== id));
     deleteFromDatabase();
   };

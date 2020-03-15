@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import uuid from 'uuid/v4';
-import { todoItem, items, myDbs } from '../utils/types';
+import { todoItem, items, myDbs } from '../../utils/types';
 
 type props = {
     isOpen: boolean;
@@ -25,8 +25,6 @@ type inputE = React.ChangeEvent<HTMLInputElement>;
 type blurE = React.FocusEvent<HTMLInputElement>;
 
 const useStyles = makeStyles({});
-
-/***TODO: add validation to name 32 characters is max */
 
 
 const TodoDialog: React.FC<props> = ({ isOpen, handleClose, updateItems, items, db }) => {

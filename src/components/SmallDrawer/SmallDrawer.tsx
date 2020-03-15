@@ -9,9 +9,9 @@ import {
 } from '@material-ui/core';
 import DeleteSweepIcon from '@material-ui/icons/DeleteSweep';
 import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
-import DeleteAllDialog from './DeleteAllDialog';
-import { items, myDbs } from '../utils/types';
-import PomodoDialog from './PomodoDialog';
+import DeleteAllDialog from '../DeleteAllDialog/DeleteAllDialog';
+import { items, myDbs } from '../../utils/types';
+import PomodoDialog from '../PomodoroDialog/PomodoDialog';
 
 type props = {
     toggleDrawer(open: boolean): (event: React.KeyboardEvent | React.MouseEvent) => void,

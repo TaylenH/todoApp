@@ -1,14 +1,14 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { todoItem } from "../utils/types";
+import { todoItem } from "../../utils/types";
 import {
   Paper,
   IconButton,
   Icon
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
-import ImportanceIcon from "./ImportanceIcon";
-import CP from "../color/color";
+import ImportanceIcon from "../ImportanceIcon/ImportanceIcon";
+import CP from "../../color/color";
 
 interface props {
   todoItem: todoItem;
