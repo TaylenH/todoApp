@@ -5,7 +5,7 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import RemoveIcon from '@material-ui/icons/Remove';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import { items, sortType } from '../../utils/types';
-import TodoItem from '../TodoItem/TodoItem';
+import ToDoItem from '../ToDoItem/ToDoItem';
 
 type props = {
     sortedItems: items,
@@ -34,7 +34,7 @@ const useStyles = makeStyles({
     }
 })
 
-const TodoListSurface = ({sortedItems, handleDelete, sortType, handleSortIconClick}: props) => {
+const ToDoListSurface = ({sortedItems, handleDelete, sortType, handleSortIconClick}: props) => {
     const styles = useStyles();
 
     const renderIcon = (): React.ReactNode => {
@@ -71,8 +71,8 @@ const TodoListSurface = ({sortedItems, handleDelete, sortType, handleSortIconCli
             </div>
             <hr />
             {sortedItems.map(item => {
-                return <TodoItem
-                    todoItem={item}
+                return <ToDoItem
+                    ToDoItem={item}
                     handleDelete={handleDelete}
                     key={item.id}
                 />
@@ -81,4 +81,4 @@ const TodoListSurface = ({sortedItems, handleDelete, sortType, handleSortIconCli
     );
 }
 
-export default TodoListSurface;
+export default ToDoListSurface;

@@ -1,15 +1,15 @@
 import { openDB, deleteDB } from "idb";
 import {} from "idb/with-async-ittr";
-import { dbsTodos } from "./types";
+import { dbsToDos } from "./types";
 
 export const openConnection = async () => {
   if (window.indexedDB) {
-    const db = await openDB("todoList", 3, {
+    const db = await openDB("ToDoList", 3, {
       upgrade(db) {
-        if (!db.objectStoreNames.contains("todoList")) {
-          let objectStore = db.createObjectStore("todoList", { keyPath: "id" });
+        if (!db.objectStoreNames.contains("ToDoList")) {
+          let objectStore = db.createObjectStore("ToDoList", { keyPath: "id" });
           objectStore.createIndex("id", "id", { unique: true });
-          objectStore.createIndex("todo", "todo", { unique: false });
+          objectStore.createIndex("ToDo", "ToDo", { unique: false });
           objectStore.createIndex("importance", "importance", {
             unique: false
           });
@@ -20,7 +20,7 @@ export const openConnection = async () => {
     });
 
     db.onversionchange = async () => {
-      let objectStore = db.transaction("todoList").objectStore("todoList");
+      let objectStore = db.transaction("ToDoList").objectStore("ToDoList");
       if (!objectStore.index("id")) {
         objectStore.createIndex("id", "id", { unique: true });
       }
@@ -29,26 +29,26 @@ export const openConnection = async () => {
     const database = {
       addRecord: async (
         id: string,
-        todoDescription: string,
-        todoImportance: number
+        ToDoDescription: string,
+        ToDoImportance: number
       ) => {
-        await db.add("todoList", {
+        await db.add("ToDoList", {
           id: id,
-          todo: todoDescription,
-          importance: todoImportance
+          ToDo: ToDoDescription,
+          importance: ToDoImportance
         });
       },
 
-      readAllTodos: async (): Promise<dbsTodos[]> => {
+      readAllToDos: async (): Promise<dbsToDos[]> => {
         let list = [];
-        const transaction = db.transaction("todoList", "readwrite");
-        const index = transaction.objectStore("todoList").index("id");
+        const transaction = db.transaction("ToDoList", "readwrite");
+        const index = transaction.objectStore("ToDoList").index("id");
 
         for await (const cursor of index.iterate()) {
           list.push({
             id: cursor.key.toString(),
-            todoDescription: cursor.value.todo,
-            todoImportance: cursor.value.importance
+            ToDoDescription: cursor.value.ToDo,
+            ToDoImportance: cursor.value.importance
           });
         }
 
@@ -57,12 +57,12 @@ export const openConnection = async () => {
       },
 
       deleteRecord: async (id: string) => {
-        await db.delete("todoList", id);
+        await db.delete("ToDoList", id);
       },
 
       deleteAllRecords: async () => {
-        const transaction = db.transaction("todoList", "readwrite");
-        const index = transaction.objectStore("todoList").index("id");
+        const transaction = db.transaction("ToDoList", "readwrite");
+        const index = transaction.objectStore("ToDoList").index("id");
 
         for await (const cursor of index.iterate()) {
           database.deleteRecord(cursor.key.toString());

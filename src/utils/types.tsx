@@ -1,26 +1,26 @@
-export interface todoItem {
+export interface ToDoItem {
   name: string;
   importance: number;
   id: string;
 }
 
-export type items = todoItem[];
+export type items = ToDoItem[];
 
 export type sortType = 0 | 1 | -1;
 
 export interface myDbs {
   addRecord: (
     id: string,
-    todoDescription: string,
-    todoImportance: number
+    ToDoDescription: string,
+    ToDoImportance: number
   ) => Promise<void>;
-  readAllTodos: () => Promise<dbsTodos[]>;
+  readAllToDos: () => Promise<dbsToDos[]>;
   deleteRecord: (id: string) => Promise<void>;
   deleteAllRecords: () => Promise<void>;
 }
 
-export interface dbsTodos {
+export interface dbsToDos {
   id: string;
-  todoDescription: any;
-  todoImportance: any;
+  ToDoDescription: any;
+  ToDoImportance: any;
 }

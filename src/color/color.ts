@@ -2,7 +2,7 @@ export default {
     pallet: {
 
     },
-    todoPallet: {
+    ToDoPallet: {
         color1: '#ff0000',
         color2: '#ff6f00',
         color3: '#ffe100',

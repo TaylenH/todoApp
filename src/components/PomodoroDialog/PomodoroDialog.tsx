@@ -10,37 +10,37 @@ import {
 
 type props = {
     isOpen: boolean,
-    handlePomodoDialogClose(start?: boolean): void,
-    handlePomodoEnd(): void
+    handlePomodoroDialogClose(start?: boolean): void,
+    handlePomodoroEnd(): void
 };
 
-const PomodoDialog = ({isOpen, handlePomodoDialogClose, handlePomodoEnd}: props) => {
+const PomodoroDialog = ({isOpen, handlePomodoroDialogClose, handlePomodoroEnd}: props) => {
 
     return (
         <Dialog
             open={isOpen}
-            onClose={() => handlePomodoDialogClose()}
-            aria-labelledby='pomodo-dialog-title'
+            onClose={() => handlePomodoroDialogClose()}
+            aria-labelledby='Pomodoro-dialog-title'
         >
-            <DialogTitle id='delete-form-title'>Pomodo Timer</DialogTitle>
+            <DialogTitle id='delete-form-title'>Pomodoro Timer</DialogTitle>
             <DialogContent>
                 <DialogContentText>
-                    Would you like to start a pomodo timer?
+                    Would you like to start a Pomodoro timer?
                     You Will be notified to take a five minute break every 30 minutes.
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button color='primary' variant='contained' onClick={() => handlePomodoDialogClose(true)}>
+                <Button color='primary' variant='contained' onClick={() => handlePomodoroDialogClose(true)}>
                     Start timer
                 </Button>
                 <Button variant='outlined' onClick={() => {
-                    handlePomodoEnd();
-                    handlePomodoDialogClose();
+                    handlePomodoroEnd();
+                    handlePomodoroDialogClose();
                 }}>
                     Turn off timer
                 </Button>
                 <Button variant='outlined' onClick={() => {
-                    handlePomodoDialogClose();
+                    handlePomodoroDialogClose();
                 }}>
                     Cancel
                 </Button>
@@ -49,4 +49,4 @@ const PomodoDialog = ({isOpen, handlePomodoDialogClose, handlePomodoEnd}: props)
     );
 }
 
-export default PomodoDialog;
+export default PomodoroDialog;

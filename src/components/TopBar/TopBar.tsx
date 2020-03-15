@@ -42,7 +42,7 @@ const TopBar = ({toggleDrawer}: props) => {
             <HideOnScroll>
                 <AppBar>
                     <Toolbar>
-                        <Typography variant="h6" className={classes.title} >Todo</Typography>
+                        <Typography variant="h6" className={classes.title} >ToDo</Typography>
                         <IconButton edge="end" color="inherit" type="button" aria-label="menu" onClick={toggleDrawer(true)}>
                             <MenuIcon />
                         </IconButton>

@@ -4,13 +4,11 @@ import {
   TextField,
   Dialog,
   DialogActions,
-  DialogContent,
-  DialogContentText,
   DialogTitle
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import uuid from 'uuid/v4';
-import { todoItem, items, myDbs } from '../../utils/types';
+import { ToDoItem, items, myDbs } from '../../utils/types';
 
 type props = {
     isOpen: boolean;
@@ -27,7 +25,7 @@ type blurE = React.FocusEvent<HTMLInputElement>;
 const useStyles = makeStyles({});
 
 
-const TodoDialog: React.FC<props> = ({ isOpen, handleClose, updateItems, items, db }) => {
+const ToDoDialog: React.FC<props> = ({ isOpen, handleClose, updateItems, items, db }) => {
     const classes = useStyles();
 
     const [itemName, updateName] = React.useState<string>("");
@@ -48,7 +46,7 @@ const TodoDialog: React.FC<props> = ({ isOpen, handleClose, updateItems, items, 
       function handleAdd(event: React.MouseEvent): void {
         event.preventDefault();
         if(itemName && itemImportance !== 0 && formErrors[0] !== true && formErrors[1] !== true){
-          let item: todoItem = {
+          let item: ToDoItem = {
             name : itemName,
             importance: itemImportance,
             id: uuid()
@@ -99,18 +97,13 @@ const TodoDialog: React.FC<props> = ({ isOpen, handleClose, updateItems, items, 
           onClose={handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">New Todo list item</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Please enter the name and importance of your Todo list item
-            </DialogContentText>
-          </DialogContent>
+          <DialogTitle id="form-dialog-title">New To-Do list item</DialogTitle>
           <TextField
             autoFocus
-            helperText='Please enter Todo name'
-            id='todoNameField'
+            helperText='Please enter ToDo name'
+            id='ToDoNameField'
             label='Name'
-            name='todoNameField'
+            name='ToDoNameField'
             onChange={e => handleUpdate((e as inputE), 'name')}
             placeholder='Enter Item Name'
             required
@@ -119,7 +112,7 @@ const TodoDialog: React.FC<props> = ({ isOpen, handleClose, updateItems, items, 
             error={formErrors[0]}
           />
         <TextField
-            id='todoImportanceField'
+            id='ToDoImportanceField'
             label='importance'
             onChange={e => handleUpdate((e as inputE), 'importance')}
             required
@@ -141,4 +134,4 @@ const TodoDialog: React.FC<props> = ({ isOpen, handleClose, updateItems, items, 
   );
 };
 
-export default TodoDialog;
+export default ToDoDialog;

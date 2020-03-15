@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { todoItem } from "../../utils/types";
+import { ToDoItem } from "../../utils/types";
 import {
   Paper,
   IconButton,
@@ -11,7 +11,7 @@ import ImportanceIcon from "../ImportanceIcon/ImportanceIcon";
 import CP from "../../color/color";
 
 interface props {
-  todoItem: todoItem;
+  ToDoItem: ToDoItem;
   handleDelete(id: string): void;
 }
 
@@ -40,39 +40,39 @@ const useStyles = makeStyles({
     left: "78%"
   },
   color1: {
-    backgroundColor: CP.todoPallet.color1
+    backgroundColor: CP.ToDoPallet.color1
   },
   color2: {
-    backgroundColor: CP.todoPallet.color2
+    backgroundColor: CP.ToDoPallet.color2
   },
   color3: {
-    backgroundColor: CP.todoPallet.color3
+    backgroundColor: CP.ToDoPallet.color3
   },
   color4: {
-    backgroundColor: CP.todoPallet.color4
+    backgroundColor: CP.ToDoPallet.color4
   },
   color5: {
-    backgroundColor: CP.todoPallet.color5
+    backgroundColor: CP.ToDoPallet.color5
   },
   color6: {
-    backgroundColor: CP.todoPallet.color6
+    backgroundColor: CP.ToDoPallet.color6
   },
   color7: {
-    backgroundColor: CP.todoPallet.color7
+    backgroundColor: CP.ToDoPallet.color7
   },
   color8: {
-    backgroundColor: CP.todoPallet.color8
+    backgroundColor: CP.ToDoPallet.color8
   },
   color9: {
-    backgroundColor: CP.todoPallet.color9
+    backgroundColor: CP.ToDoPallet.color9
   }
 });
 
-const TodoItem = ({ todoItem: todo, handleDelete }: props) => {
+const ToDoItem = ({ ToDoItem: ToDo, handleDelete }: props) => {
   const styles = useStyles();
 
   const getColor = () => {
-    switch (todo.importance) {
+    switch (ToDo.importance) {
       case 1:
         return styles.color1;
       case 2:
@@ -101,10 +101,10 @@ const TodoItem = ({ todoItem: todo, handleDelete }: props) => {
   return (
     <Paper className={`${styles.paper} ${color}`}>
       <div className={styles.name}>
-        <p>{todo.name}</p>
+        <p>{ToDo.name}</p>
       </div>
       <IconButton
-        onClick={() => handleDelete(todo.id)}
+        onClick={() => handleDelete(ToDo.id)}
         className={styles.delete}
       >
         <Icon>
@@ -112,10 +112,10 @@ const TodoItem = ({ todoItem: todo, handleDelete }: props) => {
         </Icon>
       </IconButton>
       <Icon className={styles.importance}>
-        <ImportanceIcon importance={todo.importance} />
+        <ImportanceIcon importance={ToDo.importance} />
       </Icon>
     </Paper>
   );
 };
 
-export default TodoItem;
+export default ToDoItem;

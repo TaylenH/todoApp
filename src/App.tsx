@@ -1,15 +1,15 @@
 import React from "react";
-import { items, sortType, myDbs, dbsTodos } from "./utils/types";
+import { items, sortType, myDbs, dbsToDos } from "./utils/types";
 import { Fab, Container, Snackbar } from "@material-ui/core";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
 import EventListener from "react-event-listener";
-import TodoDialog from "./components/TodoDialog/TodoDialog";
+import ToDoDialog from "./components/ToDoDialog/ToDoDialog";
 import TopBar from "./components/TopBar/TopBar";
 import SmallDrawer from "./components/SmallDrawer/SmallDrawer";
 import AddIcon from "@material-ui/icons/Add";
 
-import TodoListSurface from "./components/TodolistSurface/TodoListSurface";
+import ToDoListSurface from "./components/ToDolistSurface/ToDoListSurface";
 import { openConnection } from "./utils/indexedUtils";
 
 const useStyles = makeStyles({
@@ -28,10 +28,10 @@ const App: React.FC = () => {
 
   const [items, updateItems] = React.useState<items>([]);
   const [sortOption, setSortOption] = React.useState<sortType>(0);
-  const [isTodoOpen, setTodoOpen] = React.useState<boolean>(false);
+  const [isToDoOpen, setToDoOpen] = React.useState<boolean>(false);
   const [isDrawerOpen, setDrawerOpen] = React.useState<boolean>(false);
-  const [isPomodoReady, setPomodoReady] = React.useState<boolean>(false);
-  const [pomodoInterval, setPomodoInterval] = React.useState<number>(0);
+  const [isPomodoroReady, setPomodoroReady] = React.useState<boolean>(false);
+  const [PomodoroInterval, setPomodoroInterval] = React.useState<number>(0);
   const [db, setDb] = React.useState<myDbs | null>(null);
 
   let sortedItems = [...items];
@@ -43,23 +43,23 @@ const App: React.FC = () => {
       setDb(request);
       return request;
     };
-    const getTodos = async (database: myDbs) => {
+    const getToDos = async (database: myDbs) => {
       console.log(database);
       if (database) {
-        let list = await database.readAllTodos();
-        let todoList: items = list.map(item => {
+        let list = await database.readAllToDos();
+        let ToDoList: items = list.map(item => {
           return {
             id: item.id,
-            name: item.todoDescription,
-            importance: item.todoImportance
+            name: item.ToDoDescription,
+            importance: item.ToDoImportance
           };
         });
-        updateItems(todoList);
+        updateItems(ToDoList);
       }
     };
 
     try {
-      establishConnection().then(database => getTodos(database));
+      establishConnection().then(database => getToDos(database));
     } catch (e) {
       console.log(e.message);
     }
@@ -94,12 +94,12 @@ const App: React.FC = () => {
     updateItems(items);
   };
 
-  const handleTodoDialogOpen = (): void => {
-    setTodoOpen(true);
+  const handleToDoDialogOpen = (): void => {
+    setToDoOpen(true);
   };
 
-  const handleTodoDialogClose = (): void => {
-    setTodoOpen(false);
+  const handleToDoDialogClose = (): void => {
+    setToDoOpen(false);
   };
 
   const toggleDrawer = (open: boolean) => (
@@ -142,20 +142,20 @@ const App: React.FC = () => {
     }
   };
 
-  const handlePomodoStart = (): void => {
-    if (pomodoInterval) {
-      window.clearInterval(pomodoInterval);
+  const handlePomodoroStart = (): void => {
+    if (PomodoroInterval) {
+      window.clearInterval(PomodoroInterval);
     }
-    setPomodoInterval(
-      window.setInterval(() => setPomodoReady(true), 1000 * 60 * 30)
+    setPomodoroInterval(
+      window.setInterval(() => setPomodoroReady(true), 1000 * 60 * 30)
     );
   };
 
-  const handlePomodoEnd = (): void => {
-    window.clearInterval(pomodoInterval);
+  const handlePomodoroEnd = (): void => {
+    window.clearInterval(PomodoroInterval);
   };
 
-  const handlePomodoSnackbarClose = (
+  const handlePomodoroSnackbarClose = (
     event?: React.SyntheticEvent,
     reason?: string
   ) => {
@@ -163,7 +163,7 @@ const App: React.FC = () => {
       return;
     }
 
-    setPomodoReady(false);
+    setPomodoroReady(false);
   };
 
   return (
@@ -174,18 +174,18 @@ const App: React.FC = () => {
         toggleDrawer={toggleDrawer}
         open={isDrawerOpen}
         updateItems={handleUpdateItems}
-        handlePomodoStart={handlePomodoStart}
-        handlePomodoEnd={handlePomodoEnd}
+        handlePomodoroStart={handlePomodoroStart}
+        handlePomodoroEnd={handlePomodoroEnd}
         db={db}
       />
-      <TodoDialog
-        isOpen={isTodoOpen}
-        handleClose={handleTodoDialogClose}
+      <ToDoDialog
+        isOpen={isToDoOpen}
+        handleClose={handleToDoDialogClose}
         updateItems={updateItems}
         items={items}
         db={db}
       />
-      <TodoListSurface
+      <ToDoListSurface
         sortedItems={sortedItems}
         handleDelete={handleDelete}
         sortType={sortOption}
@@ -193,23 +193,23 @@ const App: React.FC = () => {
       />
       <Fab
         color="primary"
-        onClick={handleTodoDialogOpen}
+        onClick={handleToDoDialogOpen}
         className={styles.fab}
       >
         <AddIcon />
       </Fab>
       <Snackbar
-        open={isPomodoReady}
+        open={isPomodoroReady}
         autoHideDuration={8000}
-        onClose={handlePomodoSnackbarClose}
+        onClose={handlePomodoroSnackbarClose}
       >
         <MuiAlert
           elevation={6}
           variant="filled"
-          onClose={handlePomodoSnackbarClose}
+          onClose={handlePomodoroSnackbarClose}
           severity="warning"
         >
-          Pomodo Timer: Time to take a break!
+          Pomodoro Timer: Time to take a break!
         </MuiAlert>
       </Snackbar>
     </Container>

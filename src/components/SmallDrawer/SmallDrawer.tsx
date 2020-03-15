@@ -11,14 +11,14 @@ import DeleteSweepIcon from '@material-ui/icons/DeleteSweep';
 import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
 import DeleteAllDialog from '../DeleteAllDialog/DeleteAllDialog';
 import { items, myDbs } from '../../utils/types';
-import PomodoDialog from '../PomodoroDialog/PomodoDialog';
+import PomodoroDialog from '../PomodoroDialog/PomodoroDialog';
 
 type props = {
     toggleDrawer(open: boolean): (event: React.KeyboardEvent | React.MouseEvent) => void,
     open: boolean,
     updateItems(items: items): void,
-    handlePomodoStart(): void,
-    handlePomodoEnd(): void,
+    handlePomodoroStart(): void,
+    handlePomodoroEnd(): void,
     db: myDbs | null
 };
 
@@ -31,10 +31,10 @@ const useStyles = makeStyles({
     },
 });
 
-const SmallDrawer = ({toggleDrawer, open, updateItems, handlePomodoStart, handlePomodoEnd, db}: props) => {
+const SmallDrawer = ({toggleDrawer, open, updateItems, handlePomodoroStart, handlePomodoroEnd, db}: props) => {
     const classes = useStyles();
     const [isDeleteOpen, setDeleteOpen] = React.useState<boolean>(false);
-    const [isPomodoOpen, setPomodoOpen] = React.useState<boolean>(false);
+    const [isPomodoroOpen, setPomodoroOpen] = React.useState<boolean>(false);
 
     const handleDeleteOpen = (): void => {
         setDeleteOpen(true);
@@ -60,15 +60,15 @@ const SmallDrawer = ({toggleDrawer, open, updateItems, handlePomodoStart, handle
         handleDeleteClose();
     }
 
-    const handlePomodoDialogOpen = (): void => { 
-        setPomodoOpen(true);
+    const handlePomodoroDialogOpen = (): void => { 
+        setPomodoroOpen(true);
     }
 
-    const handlePomodoDialogClose = (start: boolean = false): void => {
+    const handlePomodoroDialogClose = (start: boolean = false): void => {
         if(start){
-            handlePomodoStart();
+            handlePomodoroStart();
         }
-        setPomodoOpen(false);
+        setPomodoroOpen(false);
     }
 
     const sideList = () => (
@@ -78,9 +78,9 @@ const SmallDrawer = ({toggleDrawer, open, updateItems, handlePomodoStart, handle
                     <ListItemIcon><DeleteSweepIcon /></ListItemIcon>
                     <ListItemText>Delete All</ListItemText>
                 </ListItem>
-                <ListItem button onClick={handlePomodoDialogOpen} >
+                <ListItem button onClick={handlePomodoroDialogOpen} >
                     <ListItemIcon><AccessAlarmIcon /></ListItemIcon>
-                    <ListItemText>Pomodo Timer</ListItemText>
+                    <ListItemText>Pomodoro Timer</ListItemText>
                 </ListItem>
             </List>
         </div>
@@ -97,10 +97,10 @@ const SmallDrawer = ({toggleDrawer, open, updateItems, handlePomodoStart, handle
                 {sideList()}
             </SwipeableDrawer>
             <DeleteAllDialog handleDeleteAll={handleDeleteAll} isOpen={isDeleteOpen} handleClose={handleDeleteClose} />
-            <PomodoDialog
-                handlePomodoEnd={handlePomodoEnd}
-                handlePomodoDialogClose={handlePomodoDialogClose}
-                isOpen={isPomodoOpen}
+            <PomodoroDialog
+                handlePomodoroEnd={handlePomodoroEnd}
+                handlePomodoroDialogClose={handlePomodoroDialogClose}
+                isOpen={isPomodoroOpen}
             />
         </div>
     );
