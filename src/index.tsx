@@ -12,7 +12,6 @@ ReactDOM.render(<App />, document.getElementById("root"));
 serviceWorker.register();
 
 //TODO: Fix formatting issues with ToDos. attempt to use css flexbox
-//TODO: format Dialogs boxes.
 //TODO: Add validation to ToDo name, max character length of 32 characters.
 //TODO: Fix accessability issues with button labels
 //TODO: add documentation comments

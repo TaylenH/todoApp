@@ -1,10 +1,10 @@
-export interface ToDoItem {
+export interface ToDoItemShape {
   name: string;
   importance: number;
   id: string;
 }
 
-export type items = ToDoItem[];
+export type items = ToDoItemShape[];
 
 export type sortType = 0 | 1 | -1;
 

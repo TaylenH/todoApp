@@ -1,7 +1,7 @@
 import React from "react";
-import { items, sortType, myDbs, dbsToDos } from "./utils/types";
+import { items, sortType, myDbs } from "./utils/types";
 import { Fab, Container, Snackbar } from "@material-ui/core";
-import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
+import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
 import EventListener from "react-event-listener";
 import ToDoDialog from "./components/ToDoDialog/ToDoDialog";

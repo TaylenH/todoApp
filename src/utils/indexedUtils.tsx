@@ -1,4 +1,4 @@
-import { openDB, deleteDB } from "idb";
+import { openDB } from "idb";
 import {} from "idb/with-async-ittr";
 import { dbsToDos } from "./types";
 

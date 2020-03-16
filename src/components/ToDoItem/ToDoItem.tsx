@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { ToDoItem } from "../../utils/types";
+import { ToDoItemShape } from "../../utils/types";
 import {
   Paper,
   IconButton,
@@ -11,7 +11,7 @@ import ImportanceIcon from "../ImportanceIcon/ImportanceIcon";
 import CP from "../../color/color";
 
 interface props {
-  ToDoItem: ToDoItem;
+  ToDoItem: ToDoItemShape;
   handleDelete(id: string): void;
 }
 
