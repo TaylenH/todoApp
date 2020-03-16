@@ -11,7 +11,6 @@ ReactDOM.render(<App />, document.getElementById("root"));
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.register();
 
-//TODO: Fix formatting issues with ToDos. attempt to use css flexbox
 //TODO: add documentation comments
 //TODO: move all components to their own folders, write tests using jest and react-testing-library
 //TODO: Write readme.md

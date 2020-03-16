@@ -21,23 +21,23 @@ const useStyles = makeStyles({
     height: "40px",
     border: "1px solid black",
     boxShadow: "5px 5px 5px grey",
-    width: "90%"
+    width: "90%",
+    display: 'flex',
+    flexFlow: 'row nowrap',
+    padding: '0 5px 0 5px'
   },
   name: {
-    position: "relative",
-    left: "25px",
-    bottom: "5px",
-    fontSize: "1.1rem"
+    alignSelf: 'center',
+    fontSize: "1.1rem",
+    flexBasis: '70%'
   },
   delete: {
-    position: "relative",
-    bottom: "58px",
-    left: "70%"
+    alignSelf: 'center',
+    flexBasis: '20%'
   },
   importance: {
-    position: "relative",
-    bottom: "51px",
-    left: "78%"
+    alignSelf: 'center',
+    flexBasis: '10%'
   },
   color1: {
     backgroundColor: CP.ToDoPallet.color1

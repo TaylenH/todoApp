@@ -16,17 +16,20 @@ type props = {
 
 const useStyles = makeStyles({
     mainSurface : {
-        margin: '30px 5% auto 5%',
+        margin: '30px auto auto',
+        width: '90%',
         display: 'flex',
-        flexFlow: 'column no-wrap'
+        flexFlow: 'row nowrap'
     },
     nameLabel: {
-        flex: '1 1 65%'
+        selfAlign: 'center',
+        flexBasis: '85%'
     },
     importanceBox: {
-        flex: '1 1 30%',
+        alignSelf: 'center',
+        flexBasis: '15%',
         display: 'flex',
-        alignItems: 'center'
+        flexFlow: 'row nowrap'
     },
     fullSurface: {
         marginBottom: '80px',
