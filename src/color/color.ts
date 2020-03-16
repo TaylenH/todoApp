@@ -9,8 +9,8 @@ export default {
         color4: '#77ff00',
         color5: '#00ffcc',
         color6: '#0077ff',
-        color7: '#2200ff',
-        color8: '#ae00ff',
-        color9: '#4f0a61',
+        color7: '#006fff',
+        color8: '#e654ff',
+        color9: '#a945f3',
     }
 };

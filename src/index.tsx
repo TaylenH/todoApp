@@ -11,15 +11,12 @@ ReactDOM.render(<App />, document.getElementById("root"));
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.register();
 
-//ToDo: Fix formatting issues with ToDos. attempt to use css flexbox
-//ToDo: Find and replace all spelling errors in ui
-// ToDo is ToDo and Pomodoro is Pomodoro
-//ToDo: Choose colors for ToDo items that have high contrast with text color
-//ToDo: format Dialogs boxes. ToDoDialog is too large for Cell Phone ViewPorts
-//ToDo: Add validation to ToDo name, max character length of 32 characters.
-//ToDo: Fix accessability issues with button labels
-//ToDo: add documentation comments
-//ToDo: move all components to their own folders, write tests using jest and react-testing-library
-//ToDo: Write readme.md
+//TODO: Fix formatting issues with ToDos. attempt to use css flexbox
+//TODO: format Dialogs boxes.
+//TODO: Add validation to ToDo name, max character length of 32 characters.
+//TODO: Fix accessability issues with button labels
+//TODO: add documentation comments
+//TODO: move all components to their own folders, write tests using jest and react-testing-library
+//TODO: Write readme.md
 
-//ToDo: ?? attempt to implement the notifications Api ??
+//TODO: ?? attempt to implement the notifications Api ??
