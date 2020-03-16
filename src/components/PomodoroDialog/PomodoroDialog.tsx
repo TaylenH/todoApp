@@ -22,7 +22,7 @@ const PomodoroDialog = ({isOpen, handlePomodoroDialogClose, handlePomodoroEnd}: 
             onClose={() => handlePomodoroDialogClose()}
             aria-labelledby='Pomodoro-dialog-title'
         >
-            <DialogTitle id='delete-form-title'>Pomodoro Timer</DialogTitle>
+            <DialogTitle id='Pomodoro-form-title'>Pomodoro Timer</DialogTitle>
             <DialogContent>
                 <DialogContentText>
                     Would you like to start a Pomodoro timer?
@@ -30,18 +30,18 @@ const PomodoroDialog = ({isOpen, handlePomodoroDialogClose, handlePomodoroEnd}: 
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button color='primary' variant='contained' onClick={() => handlePomodoroDialogClose(true)}>
+                <Button color='primary' variant='contained' onClick={() => handlePomodoroDialogClose(true)} aria-label='Start timer'>
                     Start timer
                 </Button>
                 <Button variant='outlined' onClick={() => {
                     handlePomodoroEnd();
                     handlePomodoroDialogClose();
-                }}>
+                }} aria-label='Turn off timer'>
                     Turn off timer
                 </Button>
                 <Button variant='outlined' onClick={() => {
                     handlePomodoroDialogClose();
-                }}>
+                }} aria-label='Cancel'>
                     Cancel
                 </Button>
             </DialogActions>

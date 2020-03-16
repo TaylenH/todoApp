@@ -195,6 +195,7 @@ const App: React.FC = () => {
         color="primary"
         onClick={handleToDoDialogOpen}
         className={styles.fab}
+        aria-label='Add new To-Do Item'
       >
         <AddIcon />
       </Fab>

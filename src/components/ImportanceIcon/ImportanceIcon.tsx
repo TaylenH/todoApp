@@ -16,25 +16,25 @@ type props = {
 const ImportanceIcon = ({ importance }: props) => {
     switch(importance){
         case 1:
-            return <Filter1Icon />
+            return <Filter1Icon aria-label='Importance Icon 1'/>
         case 2: 
-            return <Filter2Icon />
+            return <Filter2Icon aria-label='Importance Icon 2'/>
         case 3:
-            return <Filter3Icon />
+            return <Filter3Icon aria-label='Importance Icon 3'/>
         case 4:
-            return <Filter4Icon />
+            return <Filter4Icon aria-label='Importance Icon 4'/>
         case 5:
-            return <Filter5Icon />
+            return <Filter5Icon aria-label='Importance Icon 5'/>
         case 6:
-            return <Filter6Icon />
+            return <Filter6Icon aria-label='Importance Icon 6'/>
         case 7:
-            return <Filter7Icon />
+            return <Filter7Icon aria-label='Importance Icon 7'/>
         case 8:
-            return <Filter8Icon />
+            return <Filter8Icon aria-label='Importance Icon 8'/>
         case 9:
-            return <Filter9Icon />
+            return <Filter9Icon aria-label='Importance Icon 9'/>
         default:
-            return <Filter1Icon />
+            return <Filter1Icon aria-label='Importance Icon 1'/>
     }
 }
 

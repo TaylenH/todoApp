@@ -106,6 +106,7 @@ const ToDoItem = ({ ToDoItem: ToDo, handleDelete }: props) => {
       <IconButton
         onClick={() => handleDelete(ToDo.id)}
         className={styles.delete}
+        aria-label='Delete ToDo Item'
       >
         <Icon>
           <DeleteIcon />

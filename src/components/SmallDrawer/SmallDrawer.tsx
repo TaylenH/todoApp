@@ -74,11 +74,11 @@ const SmallDrawer = ({toggleDrawer, open, updateItems, handlePomodoroStart, hand
     const sideList = () => (
         <div className={classes.list} role='presentation' onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
             <List>
-                <ListItem button onClick={handleDeleteOpen} autoFocus>
+                <ListItem button onClick={handleDeleteOpen} autoFocus aria-label='Delete All'>
                     <ListItemIcon><DeleteSweepIcon /></ListItemIcon>
                     <ListItemText>Delete All</ListItemText>
                 </ListItem>
-                <ListItem button onClick={handlePomodoroDialogOpen} >
+                <ListItem button onClick={handlePomodoroDialogOpen} aria-label='Pomodoro Timer'>
                     <ListItemIcon><AccessAlarmIcon /></ListItemIcon>
                     <ListItemText>Pomodoro Timer</ListItemText>
                 </ListItem>

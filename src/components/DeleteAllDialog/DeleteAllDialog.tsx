@@ -28,10 +28,10 @@ const DeleteAllDialog = ({handleDeleteAll, isOpen, handleClose}: props) => {
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button color='secondary' variant='contained' onClick={handleDeleteAll}>
+                <Button color='secondary' variant='contained' onClick={handleDeleteAll} aria-label='Delete All'>
                     Delete All
                 </Button>
-                <Button variant='outlined' onClick={handleClose}>
+                <Button variant='outlined' onClick={handleClose} aria-label='Cancel'>
                     Cancel
                 </Button>
             </DialogActions>

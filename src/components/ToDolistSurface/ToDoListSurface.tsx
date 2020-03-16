@@ -41,19 +41,19 @@ const ToDoListSurface = ({sortedItems, handleDelete, sortType, handleSortIconCli
         switch(sortType){
             case 0:
                 return (
-                    <IconButton type='button' onClick={() => handleSortIconClick()}>
+                    <IconButton type='button' onClick={() => handleSortIconClick()} aria-label='Sort by Time'>
                         <RemoveIcon />
                     </IconButton>
                 );
             case 1:
                 return (
-                    <IconButton type='button' onClick={() => handleSortIconClick()}>
+                    <IconButton type='button' onClick={() => handleSortIconClick()} aria-label='Sort Ascending by Importance'>
                         <ArrowUpwardIcon />
                     </IconButton>
                 );
             case -1:
                 return (
-                    <IconButton type='button' onClick={() => handleSortIconClick()}>
+                    <IconButton type='button' onClick={() => handleSortIconClick()} aria-label='Sort Descending by Importance'>
                         <ArrowDownwardIcon />
                     </IconButton>
                 );
@@ -63,9 +63,9 @@ const ToDoListSurface = ({sortedItems, handleDelete, sortType, handleSortIconCli
     return (
         <Paper className={styles.fullSurface}>
             <div className={styles.mainSurface}>
-                <h4 className={styles.nameLabel}>Name</h4>
+                <h4 className={styles.nameLabel} aria-label='Name'>Name</h4>
                 <div className={styles.importanceBox}>
-                    <h4>Importance</h4>
+                    <h4 aria-label='Importance'>Importance</h4>
                     {renderIcon()}
                 </div>
             </div>
