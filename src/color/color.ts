@@ -1,7 +1,8 @@
-export default {
-    pallet: {
+/**
+ * This exports the list of colors used for different levels of To-Do item importance
+ */
 
-    },
+export default {
     ToDoPallet: {
         color1: '#ff0000',
         color2: '#ff6f00',

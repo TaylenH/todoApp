@@ -31,6 +31,16 @@ const useStyles = makeStyles({
     },
 });
 
+/**
+ * @description - A swipeable side drawer with an additional list of user controls
+ * @param toggleDrawer - a callback that opens and closes the drawer
+ * @param open - A boolean that controls wether the drawer is open or closed
+ * @param updateItems - a callback that fires in order to update the To-do list
+ * @param handlePomodoroStart - a callback that handles starting the pomodoro timer
+ * @param handlePomodoroEnd - a callback that handles ending the pomodoro timer
+ * @param db - a database object that handles connecting to and interacting with the IndexedDB database
+ */
+
 const SmallDrawer = ({toggleDrawer, open, updateItems, handlePomodoroStart, handlePomodoroEnd, db}: props) => {
     const classes = useStyles();
     const [isDeleteOpen, setDeleteOpen] = React.useState<boolean>(false);

@@ -13,6 +13,12 @@ type props = {
     importance: number
 };
 
+/**
+ * @description - Returns the respective numbered icon for the importance entered
+ * @param importance - The number that dictates the icon returned
+ * @returns ReactNode - A Numbered Icon
+ */
+
 const ImportanceIcon = ({ importance }: props) => {
     switch(importance){
         case 1:

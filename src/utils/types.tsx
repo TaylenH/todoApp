@@ -6,6 +6,8 @@ export interface ToDoItemShape {
 
 export type items = ToDoItemShape[];
 
+
+//0 is sort by time, 1 is sort by importance ascending and -1 is sort by importance descending
 export type sortType = 0 | 1 | -1;
 
 export interface myDbs {

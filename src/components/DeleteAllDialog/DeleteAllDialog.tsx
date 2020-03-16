@@ -14,6 +14,14 @@ type props = {
     handleClose(): void
 }
 
+/**
+ * @description - The Delete all dialog allows the user the ability to delete every item in the list at one time.
+ * @param handleDeleteAll - The callback function called when 'Delete All' is clicked
+ * @param isOpen - Boolean that controls wether the Dialog window is open or closed
+ * @param handleClose - Callback function that fires after any button click in the window
+ * @returns ReactNode - Dialog window with controls
+ */
+
 const DeleteAllDialog = ({handleDeleteAll, isOpen, handleClose}: props) => {
     return (
         <Dialog

@@ -34,6 +34,11 @@ const HideOnScroll: React.FC = ({ children }) => {
     );
 };
 
+/**
+ * @description - The App bar holds the Apps title and a hamburger icon that opens a drawer with user actions
+ * @param toggleDrawer - a callback responsible for opening the swipeable drawer when the hamburger icon is clicked
+ */
+
 const TopBar = ({toggleDrawer}: props) => {
     const classes = useStyles();
 

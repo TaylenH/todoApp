@@ -25,13 +25,22 @@ type blurE = React.FocusEvent<HTMLInputElement>;
 
 const useStyles = makeStyles({});
 
-const ToDoDialog: React.FC<props> = ({
+/**
+ * @description - The ToDoDialog is a dialog window responsible for entering in information for a new To-Do list item
+ * @param isOpen - boolean that controls wether the dialog window is open or not
+ * @param handleClose - callback that handles closing the window
+ * @param updateItems - callback that handles updating the To-Do list in state
+ * @param items - the sorted list of To-Do items
+ * @param db - database object responsible for interacting with indexedDB
+ */
+
+const ToDoDialog = ({
   isOpen,
   handleClose,
   updateItems,
   items,
   db
-}) => {
+}: props) => {
   const classes = useStyles();
 
   const [itemName, updateName] = React.useState<string>("");

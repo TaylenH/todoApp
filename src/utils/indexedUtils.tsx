@@ -2,6 +2,11 @@ import { openDB } from "idb";
 import {} from "idb/with-async-ittr";
 import { dbsToDos } from "./types";
 
+/**
+ * @description - A function that establishes a connection to an IndexedDB instance
+ * @returns Promise - A promise that resolves to an object holding functions for interacting with the IndexedDB instance
+ */
+
 export const openConnection = async () => {
   if (window.indexedDB) {
     const db = await openDB("ToDoList", 3, {

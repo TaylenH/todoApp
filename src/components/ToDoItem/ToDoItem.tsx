@@ -68,6 +68,12 @@ const useStyles = makeStyles({
   }
 });
 
+/**
+ * @description - The visual representation of a single To-Do list item
+ * @param ToDoItem - A singular To-Do item from the list
+ * @param handleDelete - a callback responsible for deleting the To-Do item from state
+ */
+
 const ToDoItem = ({ ToDoItem: ToDo, handleDelete }: props) => {
   const styles = useStyles();
 

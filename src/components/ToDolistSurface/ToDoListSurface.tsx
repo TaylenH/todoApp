@@ -35,7 +35,15 @@ const useStyles = makeStyles({
         marginBottom: '80px',
         paddingBottom: '10px'
     }
-})
+});
+
+/**
+ * @description - The container that holds the headers and the visual list of To-Do items
+ * @param sortedItems - the To-Do list in state after its been sorted
+ * @param handleDelete - a callback responsible for deleting To-Do items
+ * @param sortType - The way the user has selected to sort the To-Do list
+ * @param handleSortIconClick - a callback responsible for changing the sortTYpe when the icon is clicked
+ */
 
 const ToDoListSurface = ({sortedItems, handleDelete, sortType, handleSortIconClick}: props) => {
     const styles = useStyles();
