@@ -76,14 +76,14 @@ const ToDoDialog: React.FC<props> = ({
       addToDatabase();
       handleClose();
     } else {
-      alert("Please makes sure to enter name and importance");
+      alert("Please make sure to enter a Name between 3 and 32 characters, and an Importance between 1 and 9");
     }
   }
 
   function handleBlur(event: blurE, updater: updater): void {
     switch (updater) {
       case "name":
-        if (event.target.value.length < 3) {
+        if (event.target.value.length < 3 || event.target.value.length > 32) {
           updateErrors([true, formErrors[1]]);
         } else if (formErrors[0] === true) {
           updateErrors([false, formErrors[1]]);
@@ -111,7 +111,7 @@ const ToDoDialog: React.FC<props> = ({
         <Container>
           <TextField
             autoFocus
-            helperText="Please enter ToDo name"
+            helperText="Please enter To-Do name between 3 and 32 characters"
             id="ToDoNameField"
             label="Name"
             name="ToDoNameField"
@@ -124,6 +124,7 @@ const ToDoDialog: React.FC<props> = ({
           />
           <TextField
             id="ToDoImportanceField"
+            helperText="Please enter an Importance value between 1 and 9"
             label="importance"
             onChange={e => handleUpdate(e as inputE, "importance")}
             required
